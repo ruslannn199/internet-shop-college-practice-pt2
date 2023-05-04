@@ -1,12 +1,12 @@
 const path = require('path');
-const HTMLWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-const TerserWebpackPlugin = require('terser-webpack-plugin')
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
 
-const isDev = process.env.NODE_ENV === 'development'
-const isProd = !isDev
+const isDev = process.env.NODE_ENV === 'development';
+const isProd = !isDev;
 
 const optimization = () => {
 	const config = {
@@ -64,6 +64,14 @@ const plugins = () => {
 				collapseWhitespace: isProd
 			}
 		}),
+		new CopyWebpackPlugin({
+			patterns: [
+				{
+					from: path.resolve(__dirname, 'src/assets/images/'),
+					to: path.resolve(__dirname, 'dist/assets/images')
+				}
+			]
+		}),
 		new MiniCssExtractPlugin({
 			filename: filename('css')
 		})
@@ -85,7 +93,7 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: filename('js'),
-    assetModuleFilename: 'assets/images/main/[name][ext]',
+    assetModuleFilename: 'assets/images/[name][ext]',
 		clean: true
 	},
 	resolve: {
