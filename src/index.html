@@ -1,84 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="html">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="./assets/images/logo.jpg" type="image/x-icon">
+  <link rel="shortcut icon" href="./assets/images/logo.png" type="image/x-icon">
   <title>BRAND Main</title>
 </head>
-<body>
-  <header class="header">
-    <div class="wrapper wrapper_header">
+<body class="body">
+  <div class="wrapper wrapper_header">
+    <header class="header">
       <div class="header__logo">
-        <a href="#" class="logo"><img src="assets/images/logo.jpg" alt="logo" class="logo__image">BRAND</a>
+        <a href="#" class="logo"><img src="assets/images/logo.png" alt="logo" class="logo__image"><span class="logo__text">BRAN<span class="logo__d">D</span></span></a>
         <form action="#" class="form">
-          <select name="browse" id="#" class="select select_search"><option value="Browse"></option></select>
-          <input type="text" class="input">
-          <button>0</button>
+          <select name="browse" id="#" class="select select_search"><option value="Browse" selected>Browse</option></select>
+          <input type="text" class="input" placeholder="Search for item...">
+          <button class="form__btn"></button>
         </form>
       </div>
       <div class="header__personal header-personal">
         <button class="header-personal__btn"></button>
-        <select name="my_account" id="#" class="select select_account"><option value="My Account"></option></select>
+        <select name="my_account" id="#" class="select select_account"><option value="My Account" selected>My Account</option></select>
       </div>
-    </div>
     </header>
-    <nav>
-      <div class="wrapper">
-        <ul class="menu">
-          <li class="menu__list"><a href="#!" class="menu__link">Home</a></li>
-          <li class="menu__list"><a href="#!" class="menu__link">Man</a></li>
-          <li class="menu__list"><a href="#!" class="menu__link">Women</a></li>
-          <li class="menu__list"><a href="#!" class="menu__link">Kids</a></li>
-          <li class="menu__list"><a href="#!" class="menu__link">Accoseriese</a></li>
-          <li class="menu__list"><a href="#!" class="menu__link">Featured</a></li>
-          <li class="menu__list"><a href="#!" class="menu__link">Hot Deals</a></li>
-        </ul>
-      </div>
-    </nav>
-    <div class="wrapper">
-      <div class="promo">
-        <div class="promo-content">
-          <div class="promo-text">
-            <p class="promo-text_big">THE BRAND</p>
-            <p class="promo-text_mini">OF LUXERIOUS FASHION</p>
-          </div>
-        </div>
+  </div>
+  <nav class="wrapper">
+    <ul class="menu">
+      <li class="menu__list"><a href="#!" class="menu__link">Home</a></li>
+      <li class="menu__list"><a href="#!" class="menu__link">Man</a></li>
+      <li class="menu__list"><a href="#!" class="menu__link">Women</a></li>
+      <li class="menu__list"><a href="#!" class="menu__link">Kids</a></li>
+      <li class="menu__list"><a href="#!" class="menu__link">Accoseriese</a></li>
+      <li class="menu__list"><a href="#!" class="menu__link">Featured</a></li>
+      <li class="menu__list"><a href="#!" class="menu__link">Hot Deals</a></li>
+    </ul>
+  </nav>
+  <div class="wrapper wrapper_promo">
+    <div class="promo">
+      <div class="promo__rectangle"></div>
+      <div class="promo-text">
+        <p class="promo-text__title">THE BRAND</p>
+        <p class="promo-text__subtitle">OF LUXERIOUS <span class="promo-text__subtitle_pink">FASHION</span></p>
       </div>
     </div>
-    <div class="wrapper">
-      <div class="offer">
-        <div class="offer__content offer-content">
-          <div class="offer-content__big">
-            <div class="offer-content__text">
-              <p>hOT dEAL</p>
-              <p>FOR MEN</p>
-            </div>
-          </div>
-          <div class="offer-content__mini">
-            <div class="offer-content__text">
-              <p>hOT dEAL</p>
-              <p>FOR MEN</p>
-            </div>
+  </div>
+  <div class="wrapper">
+    <div class="offer">
+      <div class="offer__content offer-content">
+        <div class="offer-content__big offer-content__big_man">
+          <div class="offer-content__textbox">
+            <span class="offer-content__title">hOT dEAL</span>
+            <span class="offer-content__subtitle">FOR MEN</span>
           </div>
         </div>
+        <div class="offer-content__small offer-content__small_accessory">
+          <div class="offer-content__textbox">
+            <span class="offer-content__title">LUXIROUS & trendy</span>
+            <span class="offer-content__subtitle">ACCESORIES</span>
+          </div>
+        </div>
+      </div>
         
-        <div class="offer__content offer-content">
-          <div class="offer-content__mini">
-            <div class="offer-content__text">
-              <p>hOT dEAL</p>
-              <p>FOR MEN</p>
-            </div>
+      <div class="offer__content offer-content">
+        <div class="offer-content__small offer-content__small_woman">
+          <div class="offer-content__textbox">
+            <span class="offer-content__title">30% offer</span>
+            <span class="offer-content__subtitle">WOMEN</span>
           </div>
-          <div class="offer-content__big">
-            <div class="offer-content__text">
-              <p>hOT dEAL</p>
-              <p>FOR MEN</p>
-            </div>
+        </div>
+        <div class="offer-content__big offer-content__big_kid">
+          <div class="offer-content__textbox">
+            <span class="offer-content__title">new arrivals</span>
+            <span class="offer-content__subtitle">FOR kids</span>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </body>
 </html>

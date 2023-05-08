@@ -1,128 +1,262 @@
+@import './mixins.scss';
+@import './fonts.css';
+
+$desktop: 1600;
+$pink: #f16d7f;
+
+@mixin border($color: black) {
+  border: 1px solid black;
+}
+
+.html {
+  scroll-behavior: smooth;
+}
+
+.body {
+  font-family: "Lato", Arial, sans-serif;
+  font-weight: 300;
+}
+
 .wrapper {
+  @include flex();
   margin: 0 auto;
-  width: 1140px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
+
+  &_header {
+    justify-content: space-between;
+  }
+
+  &_promo {
+    background-color: #e8e8e8;
+  }
 }
 
 .header {
-  height: 100px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.17);
-  border: 1px solid #ececec;
+  @include flex(center, space-between);
+  @include size($desktop, $pad: (24.5, 229));
+  width: 100%;
+  border-bottom: 1px solid rgba($color: black, $alpha: 0.17);
   background-color: #ffffff;
 
+  // Логотип слева
   &__logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex();
+    @include size($desktop, $gap: (0, 37));
   }
 
+  // Логотип справа
   &__personal,
   &-personal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex(end);
+    @include size($desktop, $gap: (0, 26));
 
     &__btn {
-      margin-right: 26px;
-      width: 32px;
-      height: 29px;
+      @include size($desktop, $w: 32, $h: 32);
+      cursor: pointer;
+      border: none;
       background-color: transparent;
-      background: url(../images/basket_button.svg);
+      background: url(../images/basket_button.svg) no-repeat;
+      background-size: contain;
+      background-position-x: center;
+      background-position-y: 80%;
     }
   }
 }
 
+// Собственно логотип
 .logo {
-  color: #222222;
-  font-size: 27px;
-  font-weight: 300;
-  line-height: 32px;
+  @include flex();
+  @include size($desktop, $fz: 27, $lh: 32, $gap: (0, 13));
+  color: #222;
   text-align: center;
-  text-transform: uppercase;
   text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-transform: uppercase;
 
   &__image {
-    margin-right: 13px;
+    @include size($desktop, $w: 59, $h: 51);
+  }
+
+  &__d {
+    font-weight: 900;
+    color: $pink;
+  }
+}
+
+.form {
+  @include flex();
+
+  &__btn {
+    @include size($desktop, $w: 36, $h: 38);
+    border: #e6e6e6 1px solid;
+    border-width: 1px 1px 1px 0;
+    background: url(../images/loup.png) no-repeat transparent center;
+
+    &,
+    &:hover,
+    &:active {
+      cursor: pointer;
+    }
+  }
+}
+
+.input {
+  @include flex();
+  @include size($desktop, $w: 280, $h: 36, $pad: (0, 14), $fz: 14, $lh: 32);
+  border: 1px solid #e6e6e6;
+
+  &::placeholder {
+    color: #a4a4a4;
+    @include size($desktop, $lh: 32, $fz: 14);
+  }
+
+  &:focus {
+    outline: none;
   }
 }
 
 .select {
+  @include size($desktop, $lh: 32, $h: 38);
+  @include appearance();
+  border: #e6e6e6 1px solid;
+  vertical-align: center;
+  text-align: center;
+  cursor: pointer;
 
+  &:focus {
+    outline: none;
+  }
+  
   &_search {
-    margin-right: 37px;
+    @include size($desktop, $fz: 14, $w: 80, $pad: (0, 7, 0, 0));
+    background: url(../images/arrow-down.webp) no-repeat;
+    background-position-x: 92%;
+    background-position-y: center;
+    border-width: 1px 0 1px 1px;
+    background-color: #f5f5f5;
+  }
+
+  &_account {
+    @include size($desktop, $fz: 15, $w: 120, $pad: (0, 10, 0, 0));
+    background: url(../images/arrow-down-white.webp) no-repeat;
+    background-position-x: 92%;
+    background-position-y: center;
+    color: white;
+    background-color: $pink;
+    border: none;
   }
 }
 
-.menu{
-  display: flex;
-  justify-content: center;
+.menu {
+  @include flex();
   list-style-type: none;
 
   &__link {
-    display: block;
-    padding: 20px;
+    @include size($desktop, $fz: 14, $lh: 26, $pad: (19, 20, 22));
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #222;
     text-decoration: none;
+    transition: color 0.3s linear;
+
+    &:hover {
+      color: $pink;
+    }
   }
 }
 
-.promo{
-  height: 613px;
-  background-color: #e8e8e8;
+.promo {
+  @include size($desktop, $h: 613, $mar: (0, 0, 0, 230), $gap: (0, 12));
+  @include flex(center, flex-start);
+  width: 100%;
+  background: url(../images/promo-man.jpg) no-repeat;
+  background-size: cover;
+  user-select: none;
 
-  &-content {
-    background-image: url(../images/promo_man.jpg);
-    background-position: 0 -51px;
-    height: 100%;
+  &__rectangle {
+    background-color: $pink;
+    @include size($desktop, $w: 12, $h: 92);
   }
 
   &-text {
     color: #222222;
-    font-weight: 400;
-    font-style: normal;
-    letter-spacing: normal;
-    line-height: normal;
-    text-align: right;
     text-transform: uppercase;
-    border-left: 12px solid #f16d7f;
-     margin-left: 236px;
+    font-weight: 900;
+
+    &__title {
+      margin: 0;
+      @include size($desktop, $fz: 60);
+      letter-spacing: 1px;
+    }
+
+    &__subtitle {
+      margin: 0;
+      @include size($desktop, $fz: 40);
+      letter-spacing: 1px;
+
+      &_pink {
+        color: $pink;
+      }
+    }
   }
 }
 
 .offer{
-  padding-top: 100px;
-  padding-bottom: 100px;
-  display: flex;
-  justify-content: space-between;
+  @include flex();
+  @include size($desktop, $pad: (100, 0), $gap: (0, 20));
 
   &__content,
   &-content {
-
-    &:first-child {
-      margin-bottom: 20px;
-    }
+    @include flex(center, center, column);
+    @include size($desktop, $gap: (20, 0));
+    cursor: pointer;
 
     &__big {
-      width: 560px;
-      height: 542px;
-      background-image: url(../images/offer_man.jpg);
+      @include size($desktop, $w: 560, $h: 542);
+
+      &_man {
+        background: url(../images/offer-man.jpg) no-repeat center;
+        background-size: cover;
+      }
+
+      &_kid {
+        background: url(../images/offer-kid.jpg) no-repeat center;
+        background-size: cover;
+      }
     }
 
-    &__mini {
-      width: 560px;
-      height: 261px;
+    &__small {
+      @include size($desktop, $w: 560, $h: 261);
+
+      &_woman {
+        background: url(../images/offer-woman.png) no-repeat center;
+        background-size: cover;
+      }
+
+      &_accessory {
+        background: url(../images/offer-accessory.png) no-repeat;
+        background-position-x: right;
+        background-position-y: 0%;
+        background-color: #dadad2;
+      }
     }
 
-    &__text {
-      background-color: #ffffff;
-      margin-top: 26px;
-      padding: 16px 20px;
-      float: left;
+    &__title {
+      @include size($desktop, $fz: 18);
+      color: #222;
+    }
+
+    &__subtitle {
+      @include size($desktop, $fz: 30);
+      color: $pink;
+    }
+
+    &__textbox {
+      @include flex(flex-start, center, column);
+      width: fit-content;
+      font-weight: 900;
+      background-color: white;
+      @include size($desktop, $pad: (16, 19.5));
+      text-transform: uppercase;
+      user-select: none;
     }
   }
 }

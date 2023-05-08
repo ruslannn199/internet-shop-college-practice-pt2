@@ -1,5 +1,6 @@
 @mixin size($resolution, $pad: null, $mar: null, $w: null, $h: null,
-$fz: null, $lh: null, $gap: null, $brd-rad: null, $top: null, $left: null) {
+$fz: null, $lh: null, $gap: null, $brd-rad: null, $top: null, $left: null,
+$bottom: null, $right: null) {
 	$viewport-width: $resolution / 100;
 	$ratio: $resolution / 100vw;
 	@if $pad != null {
@@ -117,6 +118,14 @@ $fz: null, $lh: null, $gap: null, $brd-rad: null, $top: null, $left: null) {
 	@if $left != null {
 		left: #{$left / $viewport-width}vw
 	}
+
+  @if $bottom != null {
+    bottom: #{$bottom / $viewport-width}vw
+  }
+
+  @if $right != null {
+    right: #{$right / $viewport-width}vw
+  }
 }
 
 @mixin flex($align: center, $justify: center, $flex-dir: row, $flex-wrap: nowrap, $t-align: left){
@@ -149,4 +158,10 @@ $fz: null, $lh: null, $gap: null, $brd-rad: null, $top: null, $left: null) {
 	@media screen and (max-width: #{$res}px) {
 		@content;
 	}
+}
+
+@mixin appearance() {
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  appearance:none;
 }
