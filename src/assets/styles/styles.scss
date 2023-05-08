@@ -15,6 +15,7 @@ $pink: #f16d7f;
 .body {
   font-family: "Lato", Arial, sans-serif;
   font-weight: 300;
+  color: #222;
 }
 
 .wrapper {
@@ -54,7 +55,7 @@ $pink: #f16d7f;
       cursor: pointer;
       border: none;
       background-color: transparent;
-      background: url(../images/basket_button.svg) no-repeat;
+      background: url(../images/basket-button.svg) no-repeat;
       background-size: contain;
       background-position-x: center;
       background-position-y: 80%;
@@ -153,8 +154,8 @@ $pink: #f16d7f;
     @include size($desktop, $fz: 14, $lh: 26, $pad: (19, 20, 22));
     font-weight: 700;
     text-transform: uppercase;
-    color: #222;
     text-decoration: none;
+    color: #222;
     transition: color 0.3s linear;
 
     &:hover {
@@ -177,7 +178,6 @@ $pink: #f16d7f;
   }
 
   &-text {
-    color: #222222;
     text-transform: uppercase;
     font-weight: 900;
 
@@ -241,7 +241,6 @@ $pink: #f16d7f;
 
     &__title {
       @include size($desktop, $fz: 18);
-      color: #222;
     }
 
     &__subtitle {
@@ -254,9 +253,167 @@ $pink: #f16d7f;
       width: fit-content;
       font-weight: 900;
       background-color: white;
-      @include size($desktop, $pad: (16, 19.5));
+      @include size($desktop, $pad: (16, 19.5), $mar: (26, 0, 0));
       text-transform: uppercase;
       user-select: none;
     }
+  }
+}
+
+.feature {
+  @include flex(center, center, column);
+
+  &__title {
+    font-weight: 700;
+    margin: 0;
+    text-transform: capitalize;
+    @include size($desktop, $fz: 30, $mar: (0, 0, 16));
+  }
+
+  &__subtitle {
+    margin: 0;
+    font-weight: 400;
+    color: #9f9f9f;
+    @include size($desktop, $fz: 14);
+  }
+
+  &-grid {
+    @include size($desktop, $pad: (60, 0), $gap: (39, 32));
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  &-card {
+    position: relative;
+    @include flex(flex-start, center, column);
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover,
+    &:active {
+      box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16);
+
+      & .filter,
+      & .btn_add {
+        display: block;
+      }
+    }
+
+    &__img {
+      @include size($desktop, $h: 280);
+      width: 100%;
+    }
+
+    &__subtitle {
+      @include size($desktop, $mar: (20, 0, 17, 13.5), $fz: 13);
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    &__price {
+      @include size($desktop, $mar: (0, 0, 21, 13.5), $fz: 16);
+      font-weight: 700;
+      color: $pink;
+    }
+
+    & .filter,
+    & .btn_add {
+      display: none;
+    }
+  }
+}
+
+.sale {
+  @include size($desktop, $pad: (113, 230, 97));
+  @include flex();
+
+  &__banner {
+    position: relative;
+    @include size($desktop, $pad: (146, 435, 305, 39));
+    background: url(../images/sale-img.jpg) no-repeat;
+    background-size: contain;
+    color: white;
+  }
+
+  &__title {
+    font-weight: 700;
+    margin: 0;
+    @include size($desktop, $fz: 54);
+
+    &_pink {
+      color: $pink;
+    }
+  }
+
+  &__subtitle {
+    margin: 0;
+    @include size($desktop, $fz: 32);
+  }
+}
+
+.btn {
+  @include size($desktop, $pad: (18, 19, 19, 24), $fz: 16, $gap: (0, 9));
+  @include flex();
+  cursor: pointer;
+
+  &_add {
+    display: block;
+    position: absolute;
+    font-weight: 700;
+    border: 1px solid white;
+    color: white;
+    @include size($desktop, $bottom: 227, $left: 65, $pad: (15, 13, 14, 43));
+    background: url(../images/basket-button-white.svg) no-repeat;
+    background-position-x: 0.75vw;
+    background-position-y: 0.625vw;
+    z-index: 10;
+    transition: 0.35s;
+
+    &:hover,
+    &:active {
+      @include size($desktop, $brd-rad: 20);
+      border-color: transparent;
+      background-color: #222;
+      background-position-x: 0.75vw;
+      background-position-y: 0.625vw;
+      filter: invert(1);
+    }
+  }
+
+  &_pink {
+    border: none;
+    color: white;
+    background-color: $pink;
+    transition: 0.3s;
+
+    &:hover,
+    &:active {
+      background-color: white;
+      outline: 1px $pink solid;
+      color: $pink;
+
+      & .btn__arrow {
+        filter: invert(63%) sepia(70%) saturate(2883%) hue-rotate(311deg) brightness(100%) contrast(89%);
+      }
+    }
+  }
+}
+
+.filter {
+  display: block;
+  position: absolute;
+  @include size($desktop, $bottom: 92);
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #3a3838;
+  opacity: 0.5;
+
+  &_sale {
+    user-select: none;
+    background-color: transparent;
+    @include size($desktop, $w: 760, $h: 525);
+    bottom: unset;
+    right: unset;
   }
 }
