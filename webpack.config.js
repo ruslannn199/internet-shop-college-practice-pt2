@@ -77,10 +77,6 @@ const plugins = () => {
 		})
 	]
 
-	if (isProd) {
-		base.push(new WebpackBundleAnalyzer())
-	}
-
 	return base
 }
 
@@ -125,8 +121,12 @@ module.exports = {
 				test: /\.s[ac]ss$/,
 				use: cssLoaders('sass-loader')
 			},
+      {
+        test: /\.svg$/,
+        type: 'asset/inline'
+      },
 			{
-				test: /\.(png|jpg|svg|gif)$/,
+				test: /\.(png|jpg|gif|webp)$/,
 				type: 'asset/resource'
 			},
 			{
