@@ -33,6 +33,7 @@ module.exports = {
   ],
 
   scopes: [
+    { name: "assets" },
     { name: "components" },
     { name: "tutorial" },
     { name: "catalog" },

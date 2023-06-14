@@ -1,149 +1,136 @@
-const path = require('path');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserWebpackPlugin = require('terser-webpack-plugin');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const postcssPresetEnv = require('postcss-preset-env');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
 const isDev = process.env.NODE_ENV === 'development';
-const isProd = !isDev;
+const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
+const target = isDev ? 'web' : 'browserslist';
 
-const optimization = () => {
-	const config = {
-		splitChunks: {
-			chunks: 'all'
-		}
-	}
+const filename = (ext) => (isDev ? `[name].${ext}` : `[contenthash].${ext}`);
+const assetName = (folder) => `assets/${folder}/[contenthash][ext]`;
 
-	if (isProd) {
-		config.minimizer = [
-			new CssMinimizerPlugin(),
-			new TerserWebpackPlugin()
-		]
-	}
-	return config;
-}
-
-const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`
-
-const cssLoaders = extra => {
-	const loaders = [
-		{
-			loader: MiniCssExtractPlugin.loader,
-			options: {
-				esModule: isDev
-			},
-		},
-		'css-loader'
-	]
-	if (extra) {
-		loaders.push(extra)
-	}
-	return loaders
-}
-
-const babelOptions = preset => {
-	const opts = {
-		presets: [
-			'@babel/preset-env'
-		]
-	}
-	if (preset) {
-		opts.presets.pop('@babel/preset-env')
-		opts.presets.push(preset)
-	}
-	return opts
-}
-
-const plugins = () => {
-	const base = [
-		new HTMLWebpackPlugin({
-			template: './index.html',
-			filename: './index.html',
-			minify: {
-				collapseWhitespace: isProd
-			}
-		}),
-		new CopyWebpackPlugin({
-			patterns: [
-				{
-					from: path.resolve(__dirname, 'src/assets/images/'),
-					to: path.resolve(__dirname, 'dist/assets/images')
-				}
-			]
-		}),
-		new MiniCssExtractPlugin({
-			filename: filename('css')
-		})
-	]
-
-	return base
+const styleLoader = () => {
+  const loaders = [
+    {
+      loader: MiniCssExtractPlugin.loader,
+      options: { 
+        publicPath: '',
+        esModule: isDev,
+      },
+    },
+    'css-loader'
+  ];
+  if (!isDev) loaders.push({
+    loader: 'postcss-loader',
+    options: {
+      postcssOptions: {
+        plugins: [
+          postcssPresetEnv({ stage: 0 }),
+        ]
+      }
+    }
+    });
+  loaders.push('sass-loader');
+  return loaders;
 }
 
 module.exports = {
-	context: path.resolve(__dirname, 'src'),
-	mode: 'development',
-	entry: {
-		main: { import: './index.js', filename: 'index.js'}
-	},
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename: filename('js'),
-    assetModuleFilename: 'assets/images/[name][ext]',
-		clean: true
-	},
-	resolve: {
-		extensions: ['.js', '.json', '.png'],
-		alias: {
-			'@models': path.resolve(__dirname, 'src/models'),
-			'@': path.resolve(__dirname, 'src')
-		}
-	},
-	optimization: optimization(),
-	devServer: {
-		port: 9000,
-		static: {
-			directory: path.join(__dirname, 'src'),
-		},
-		compress: true,
-		open: true,
-		hot: isDev
-	},
-	devtool: isDev ? 'source-map' : 'hidden-nosources-source-map',
-	plugins: plugins(),
-	module: {
-		rules: [
-			{
-				test: /\.css$/,
-				use: cssLoaders()
-			},
-			{
-				test: /\.s[ac]ss$/,
-				use: cssLoaders('sass-loader')
-			},
+  mode: mode,
+  target: target,
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    }
+  },
+
+  resolve: {
+    extensions: ['.ts', '.js', '.json'],
+  },
+
+  entry: {
+    index: './src/index',
+  },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: filename('js'),
+    clean: true,
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpe?g|gif)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: assetName('images')
+        }
+      },
       {
         test: /\.svg$/,
-        type: 'asset/inline'
+        type: 'asset/inline',
       },
-			{
-				test: /\.(png|jpg|gif|webp)$/,
-				type: 'asset/resource'
-			},
-			{
-				test: /\.(ttf|woff|woff2|eot)$/,
-				type: 'asset/resource',
+      {
+        test: /\.(ttf|woff|woff2|eot)$/,
+        type: 'asset/resource',
         generator: {
-          filename: 'assets/fonts/[hash][ext]'
+          filename: assetName('fonts')
+        },
+      },
+      {
+        test: /\.(wav|ogg|mp3)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: assetName('sound')
         }
-			},
-			{
-        test: /\.m?js$/,
+      },
+      {
+        test: /\.html$/,
+        use: ['html-loader'],
+      },
+      {
+        test: /\.(s[ac]|c)ss$/,
+        use: styleLoader(),
+      },
+      {
+        test: /\.ts$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-          options: babelOptions()
-        }
-      }
-		]
-	}
+          loader: 'ts-loader',
+        },
+      },
+    ],
+  },
+
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: filename('css'),
+    }),
+    new HTMLWebpackPlugin({
+      template: './src/index.html',
+      filename: 'index.html',
+      minify: !isDev,
+    }),
+    // new CopyWebpackPlugin({
+    //   patterns: [
+    //     {
+    //       from : 'src/assets/images/static/',
+    //       to: 'assets/images/'
+    //     }
+    //   ]
+    // })
+  ],
+
+  devtool: isDev ? 'source-map' : 'hidden-nosources-source-map',
+  devServer: {
+    port: 9000,
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    compress: true,
+    open: true,
+    hot: isDev,
+    historyApiFallback: true,
+  },
 }

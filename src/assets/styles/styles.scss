@@ -1,4 +1,4 @@
-@import './mixins.scss';
+@import 'abstracts/mixins';
 @import './fonts.css';
 
 $desktop: 1600;
@@ -10,6 +10,7 @@ $pink: #f16d7f;
 
 .html {
   scroll-behavior: smooth;
+  font-size: .625vw;
 }
 
 .body {
@@ -33,25 +34,26 @@ $pink: #f16d7f;
 
 .header {
   @include flex(center, space-between);
-  @include size($desktop, $pad: (24.5, 229));
+  padding: 2.45rem 22.9rem;
   width: 100%;
-  border-bottom: 1px solid rgba($color: black, $alpha: 0.17);
+  border-bottom: 1px solid rgba($color: black, $alpha: .17);
   background-color: #ffffff;
 
   // Логотип слева
   &__logo {
     @include flex();
-    @include size($desktop, $gap: (0, 37));
+    column-gap: 3.7rem;
   }
 
   // Логотип справа
   &__personal,
   &-personal {
     @include flex(end);
-    @include size($desktop, $gap: (0, 26));
+    column-gap: 2.6rem;
 
     &__btn {
-      @include size($desktop, $w: 32, $h: 32);
+      width: 3.2rem;
+      height: 3.2rem;
       cursor: pointer;
       border: none;
       background-color: transparent;
@@ -66,7 +68,9 @@ $pink: #f16d7f;
 // Собственно логотип
 .logo {
   @include flex();
-  @include size($desktop, $fz: 27, $lh: 32, $gap: (0, 13));
+  font-size: 2.7rem;
+  line-height: 3.2rem;
+  column-gap: 1.3rem;
   color: #222;
   user-select: none;
   text-align: center;
@@ -74,7 +78,8 @@ $pink: #f16d7f;
   text-transform: uppercase;
 
   &__image {
-    @include size($desktop, $w: 59, $h: 51);
+    width: 5.9rem;
+    height: 5.1rem;
     -webkit-user-drag: none;
   }
 
@@ -92,7 +97,8 @@ $pink: #f16d7f;
   @include flex();
 
   &__btn {
-    @include size($desktop, $w: 36, $h: 38);
+    width: 3.6rem;
+    height: 3.8rem;
     border: #e6e6e6 1px solid;
     border-width: 1px 1px 1px 0;
     background: url(../images/loup.png) no-repeat transparent center;
@@ -107,12 +113,17 @@ $pink: #f16d7f;
 
 .input {
   @include flex();
-  @include size($desktop, $w: 280, $h: 36, $pad: (0, 14), $fz: 14, $lh: 32);
+  width: 28rem;
+  height: 3.6rem;
+  padding: 0 1.4rem;
+  font-size: 1.4rem;
+  line-height: 3.2rem;
   border: 1px solid #e6e6e6;
 
   &::placeholder {
     color: #a4a4a4;
-    @include size($desktop, $lh: 32, $fz: 14);
+    line-height: 3.2rem;
+    font-size: 1.4rem;
   }
 
   &:focus {
@@ -121,8 +132,9 @@ $pink: #f16d7f;
 }
 
 .select {
-  @include size($desktop, $lh: 32, $h: 38);
-  @include appearance();
+  line-height: 3.2rem;
+  height: 3.8rem;
+  appearance: none;
   border: #e6e6e6 1px solid;
   vertical-align: center;
   text-align: center;
@@ -133,7 +145,9 @@ $pink: #f16d7f;
   }
   
   &_search {
-    @include size($desktop, $fz: 14, $w: 80, $pad: (0, 7, 0, 0));
+    font-size: 1.4rem;
+    width: 8rem;
+    padding-right: .7rem;
     background: url(../images/arrow-down.webp) no-repeat;
     background-position-x: 92%;
     background-position-y: center;
@@ -142,7 +156,9 @@ $pink: #f16d7f;
   }
 
   &_account {
-    @include size($desktop, $fz: 15, $w: 120, $pad: (0, 10, 0, 0));
+    font-size: 1.5rem;
+    width: 12rem;
+    padding-right: 1rem;
     background: url(../images/arrow-down-white.webp) no-repeat;
     background-position-x: 92%;
     background-position-y: center;
@@ -157,12 +173,14 @@ $pink: #f16d7f;
   list-style-type: none;
 
   &__link {
-    @include size($desktop, $fz: 14, $lh: 26, $pad: (19, 20, 22));
+    font-size: 1.4rem;
+    line-height: 2.6rem;
+    padding: 1.9rem 2rem 2.2rem;
     font-weight: 700;
     text-transform: uppercase;
     text-decoration: none;
     color: #222;
-    transition: color 0.3s linear;
+    transition: color .3s linear;
 
     &:hover {
       color: $pink;
@@ -171,7 +189,9 @@ $pink: #f16d7f;
 }
 
 .promo {
-  @include size($desktop, $h: 613, $mar: (0, 0, 0, 230), $gap: (0, 12));
+  height: 61.3rem;
+  margin-left: 23rem;
+  column-gap: 1.2rem;
   @include flex(center, flex-start);
   width: 100%;
   background: url(../images/promo-man.jpg) no-repeat;
@@ -180,7 +200,8 @@ $pink: #f16d7f;
 
   &__rectangle {
     background-color: $pink;
-    @include size($desktop, $w: 12, $h: 92);
+    width: 1.2rem;
+    height: 9.2rem;
   }
 
   &-text {
@@ -189,13 +210,13 @@ $pink: #f16d7f;
 
     &__title {
       margin: 0;
-      @include size($desktop, $fz: 60);
+      font-size: 6rem;
       letter-spacing: 1px;
     }
 
     &__subtitle {
       margin: 0;
-      @include size($desktop, $fz: 40);
+      font-size: 4rem;
       letter-spacing: 1px;
 
       &_pink {
@@ -207,16 +228,18 @@ $pink: #f16d7f;
 
 .offer{
   @include flex();
-  @include size($desktop, $pad: (100, 0), $gap: (0, 20));
+  padding: 10rem 0;
+  column-gap: 2rem;
 
   &__content,
   &-content {
     @include flex(center, center, column);
-    @include size($desktop, $gap: (20, 0));
+    row-gap: 2rem;
     cursor: pointer;
 
     &__big {
-      @include size($desktop, $w: 560, $h: 542);
+      width: 56rem;
+      height: 54.2rem;
 
       &_man {
         background: url(../images/offer-man.jpg) no-repeat center;
@@ -230,7 +253,8 @@ $pink: #f16d7f;
     }
 
     &__small {
-      @include size($desktop, $w: 560, $h: 261);
+      width: 56rem;
+      height: 26.1rem;
 
       &_woman {
         background: url(../images/offer-woman.png) no-repeat center;
@@ -240,17 +264,17 @@ $pink: #f16d7f;
       &_accessory {
         background: url(../images/offer-accessory.png) no-repeat;
         background-position-x: right;
-        background-position-y: 0%;
+        background-position-y: 0;
         background-color: #dadad2;
       }
     }
 
     &__title {
-      @include size($desktop, $fz: 18);
+      font-size: 1.8rem;
     }
 
     &__subtitle {
-      @include size($desktop, $fz: 30);
+      font-size: 3rem;
       color: $pink;
     }
 
@@ -259,7 +283,8 @@ $pink: #f16d7f;
       width: fit-content;
       font-weight: 900;
       background-color: #fff;
-      @include size($desktop, $pad: (16, 19.5), $mar: (26, 0, 0));
+      padding: 1.6rem 1.95rem;
+      margin-top: 2.6rem;
       text-transform: uppercase;
       user-select: none;
     }
@@ -273,18 +298,20 @@ $pink: #f16d7f;
     font-weight: 700;
     margin: 0;
     text-transform: capitalize;
-    @include size($desktop, $fz: 30, $mar: (0, 0, 16));
+    font-size: 3rem;
+    margin-bottom: 1.6rem;
   }
 
   &__subtitle {
     margin: 0;
     font-weight: 400;
     color: #9f9f9f;
-    @include size($desktop, $fz: 14);
+    font-size: 1.4rem;
   }
 
   &-grid {
-    @include size($desktop, $pad: (60, 0), $gap: (39, 32));
+    padding: 6rem 0;
+    gap: 3.9rem 3.2rem;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
   }
@@ -293,11 +320,11 @@ $pink: #f16d7f;
     position: relative;
     @include flex(flex-start, center, column);
     cursor: pointer;
-    transition: 0.3s;
+    transition: .3s;
 
     &:hover,
     &:active {
-      box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16);
+      box-shadow: 0 5px 8px rgba(0, 0, 0, .16);
 
       & .filter,
       & .btn_add {
@@ -306,18 +333,20 @@ $pink: #f16d7f;
     }
 
     &__img {
-      @include size($desktop, $h: 280);
+      height: 28rem;
       width: 100%;
     }
 
     &__subtitle {
-      @include size($desktop, $mar: (20, 0, 17, 13.5), $fz: 13);
+      margin: 2rem 0 1.7rem 1.35rem;
+      font-size: 1.3rem;
       text-transform: uppercase;
       font-weight: 400;
     }
 
     &__price {
-      @include size($desktop, $mar: (0, 0, 21, 13.5), $fz: 16);
+      margin: 0 0 2.1rem 1.35rem;
+      font-size: 1.6rem;
       font-weight: 700;
       color: $pink;
     }
@@ -330,20 +359,21 @@ $pink: #f16d7f;
 }
 
 .sale {
-  @include size($desktop, $pad: (113, 0, 97));
+  padding: 11.3rem 0 9.7rem;
   @include flex();
   width: 100%;
   flex-wrap: nowrap;
 
   &__banner {
-    @include size($desktop, $w: 767, $h: 529);
+    width: 76.7rem;
+    height: 52.9rem;
     position: relative;
     overflow: hidden;
     cursor: pointer;
 
     &:hover {
       &::before {
-        @include rotate(5);
+        transform: rotate(5deg);
       }
 
       & .filter {
@@ -361,20 +391,21 @@ $pink: #f16d7f;
       background: url(../images/sale-img.jpg) 0 0 no-repeat;
       background-size: cover;
       z-index: -1;
-      transition: 0.5s 0.15s linear;
+      transition: .5s .15s linear;
     }
     color: #fff;
   }
 
   &__article {
     position: absolute;
-    @include size($desktop, $top: 146, $left: 39);
+    top: 14.6rem;
+    left: 3.9rem;
   }
 
   &__title {
     font-weight: 700;
     margin: 0;
-    @include size($desktop, $fz: 54);
+    font-size: 5.4rem;
 
     &_pink {
       color: $pink;
@@ -383,13 +414,15 @@ $pink: #f16d7f;
 
   &__subtitle {
     margin: 0;
-    @include size($desktop, $fz: 32);
+    font-size: 3.2rem;
   }
 
   &__desc {
-    @include flex();
+    @include flex($flex-dir: column);
     align-self: stretch;
-    @include size($desktop, $w: 370, $pad: (48, 43, 66, 36), $gap: (62, 0));
+    width: 37rem;
+    padding: 4.8rem 4.3rem 6.6rem 3.6rem;
+    row-gap: 6.2rem;
     max-height: 33.0625vw;
     background-color: #222224;
   }
@@ -397,34 +430,36 @@ $pink: #f16d7f;
   &__info,
   &-info {
     @include flex(flex-start, stretch);
-    @include size($desktop, $gap: (0, 32));
-    flex-wrap: nowrap;
+    column-gap: 3.2rem;
+    flex-wrap: wrap;
 
     &__title {
-      @include size($desktop, $fz: 20, $mar: (8, 0, 0));
+      font-size: 2rem;
+      margin: .8rem 0 0;
       font-weight: 700;
       color: #fbfbfb;
     }
 
     &__subtitle {
       margin: 0;
-      @include size($desktop, $fz: 14);
+      font-size: 1.4rem;
       color: #fbfbfb;
     }
   }
 
   &__ico {
-    @include size($desktop, $w: 44);
+    width: 4.4rem;
   }
 
   &__text {
     @include flex(center, flex-start);
-    @include size($desktop, $gap: (17, 0));
+    row-gap: 1.7rem;
   }
 }
 
 .btn {
-  @include size($desktop, $pad: (18, 19, 19, 24), $fz: 16);
+  padding: 1.8rem 1.9rem 1.9rem 2.4rem;
+  font-size: 1.6rem;
   @include flex();
   display: inline-flex;
   cursor: pointer;
@@ -435,20 +470,23 @@ $pink: #f16d7f;
     font-weight: 700;
     border: 1px solid #fff;
     color: #fff;
-    @include size($desktop, $bottom: 227, $left: 65, $pad: (15, 13, 14, 43), $gap: (0, 9));
+    bottom: 22.7rem;
+    left: 6.5rem;
+    padding: 1.5rem 1.3rem 1.4rem 4.3rem;
+    row-gap: .9rem;
     background: url(../images/basket-button-white.svg) no-repeat;
-    background-position-x: 0.75vw;
-    background-position-y: 0.625vw;
+    background-position-x: .75vw;
+    background-position-y: .625vw;
     z-index: 10;
-    transition: 0.35s;
+    transition: .35s;
 
     &:hover,
     &:active {
-      @include size($desktop, $brd-rad: 20);
+      border-radius: 2rem;
       border-color: transparent;
       background-color: #222;
-      background-position-x: 0.75vw;
-      background-position-y: 0.625vw;
+      background-position-x: .75vw;
+      background-position-y: .625vw;
       filter: invert(1);
     }
   }
@@ -457,7 +495,7 @@ $pink: #f16d7f;
     border: none;
     color: #fff;
     background-color: $pink;
-    transition: 0.3s;
+    transition: .3s;
 
     &:hover,
     &:active {
@@ -473,18 +511,21 @@ $pink: #f16d7f;
 
   &_input {
     font-weight: 400;
-    @include size($desktop, $fz: 14, $pad: (18, 20.5));
+    font-size: 1.4rem;
+    padding: 1.8rem 2.05rem;
     border-radius: 0 1.4375vw 1.4375vw 0;
     cursor: pointer;
   }
 
   &_footer {
     @include flex();
-    @include size($desktop, $w: 32, $h: 32, $mar: (0, 8));
+    width: 3.2rem;
+    height: 3.2rem;
+    margin: 0 .8rem;
     padding: 0;
     border: none;
     background-color: #fff;
-    transition: 0.3s;
+    transition: .3s;
 
     & .footer-copyright__img {
       filter: invert(70%) sepia(0%) saturate(2%) hue-rotate(221deg) brightness(100%) contrast(101%);
@@ -511,12 +552,12 @@ $pink: #f16d7f;
 .filter {
   display: block;
   position: absolute;
-  @include size($desktop, $bottom: 92);
+  bottom: 9.2rem;
   top: 0;
   left: 0;
   right: 0;
-  opacity: 0.5;
-  transition: 0.3s;
+  opacity: .5;
+  transition: .3s;
 
   &_feature {
     .feature-card:hover &,
@@ -533,7 +574,7 @@ $pink: #f16d7f;
     bottom: 0;
     z-index: 10;
     -webkit-user-drag: none;
-    transition: 0.3s;
+    transition: .3s;
   }
 }
 
@@ -546,19 +587,23 @@ $pink: #f16d7f;
 
   &-slider {
     position: relative;
-    @include size($desktop, $w: 500, $h: 171, $mar: (111, 0, 156, 100));
+    width: 50rem;
+    height: 17.1rem;
+    margin: 11.1rem 0 15.6rem 10rem;
     overflow: hidden;
     &__nav {
-      @include size($desktop, $left: 100);
+      left: 10rem;
       bottom: 0;
       position: absolute;
       display: flex;
 
       &-bar {
-        @include size($desktop, $w: 38, $h: 4, $mar: (0, 13));
+        width: 3.8rem;
+        height: .4rem;
+        margin: 0 1.3rem;
         cursor: pointer;
         background-color: #d6d6d6;
-        transition: all 0.4s ease;
+        transition: all .4s ease;
 
         &:hover {
           transform:scale(1.1);
@@ -574,13 +619,13 @@ $pink: #f16d7f;
 
     &__slide {
       @include flex(center, flex-start, column);
-      @include size($desktop, $gap: (0, 29));
+      column-gap: 2.9rem;
       width: 25%;
-      transition: all 0.6s ease;
+      transition: all .6s ease;
     }
 
     &__profile-pic {
-      @include size($desktop, $w: 83);
+      width: 8.3rem;
       border-radius: 50%;
     }
 
@@ -595,24 +640,27 @@ $pink: #f16d7f;
 
     &__italic {
       font-weight: 400;
-      @include size($desktop, $mar: (12, 0, 19), $w: 386, $fz: 16);
+      margin: 1.2rem 0 1.9rem;
+      width: 38.6rem;
+      font-size: 1.6rem;
       color: #222224;
       font-style: italic;
     }
 
     &__title {
-      @include size($desktop, $fz: 16, $lh: 26);
+      font-size: 1.6rem;
+      line-height: 2.6rem;
       color: $pink;
       font-weight: 700;
     }
 
     &__subtitle {
-      @include size($desktop, $fz: 12);
+      font-size: 1.2rem;
     }
   }
 
   &__bar {
-    @include size($desktop, $h: 438);
+    height: 43.8rem;
     width: 1px;
     background-color: #fff;
   }
@@ -620,27 +668,30 @@ $pink: #f16d7f;
   &-contacts {
     @include flex(center, center, column);
     justify-self: center;
-    @include size($desktop, $mar: (148, 92, 168, 0));
+    margin: 14.8rem 9.2rem 16.8rem 0;
 
     &__title {
-      @include size($desktop, $fz: 24, $lh: 54);
+      font-size: 2.4rem;
+      line-height: 5.4rem;
       margin: 0;
       text-transform: uppercase;
     }
 
     &__subtitle {
-      @include size($desktop, $fz: 14);
+      font-size: 1.4rem;
       margin: 0;
       text-transform: uppercase;
     }
 
     &__ctn {
-      @include size($desktop, $mar: (35, 0, 0));
+      margin-top: 3.5rem;
       @include flex();
     }
 
     &__input {
-      @include size($desktop, $w: 282, $pad: (18, 28), $fz: 14);
+      width: 28.2rem;
+      padding: 1.8rem 2.8rem;
+      font-size: 1.4rem;
       border-radius: 1.4375vw 0 0 1.4375vw;
       margin: 0;
       background-color: #e1e1e1;
@@ -694,37 +745,41 @@ $pink: #f16d7f;
 .footer {
   &-info {
     @include flex();
-    @include size($desktop, $pad: (109, 0, 89));
+    padding: 1.9rem 0 8.9rem;
   }
 
   &-about {
     @include flex(flex-start, flex-start, column);
-    @include size($desktop, $gap: (29, 0));
+    row-gap: 2.9rem;
 
     &__text {
-      @include size($desktop, $w: 427, $fz: 14, $lh: 24);
+      width: 42.7rem;
+      font-size: 1.4rem;
+      line-height: 2.4rem;
       color: #898989;
     }
   }
 
   &-list {
-    @include size($desktop, $mar: (0, 80));
+    margin: 0 8rem;
     padding: 0;
     list-style-type: none;
     
     &__title {
-      @include size($desktop, $fz: 18, $mar: (0, 0, 23));
+      font-size: 1.8rem;
+      margin: 0 0 2.3rem;
       font-weight: 700;
       color: $pink;
-      letter-spacing: 0.45px;
+      letter-spacing: .45px;
       text-transform: uppercase;
     }
 
     &__link {
-      @include size($desktop, $fz: 16, $lh: 42);
+      font-size: 1.6rem;
+      line-height: 4.2rem;
       text-decoration: none;
       color: #898989;
-      transition: 0.25s linear;
+      transition: .25s linear;
 
       &:hover {
         color: $pink;
@@ -734,13 +789,13 @@ $pink: #f16d7f;
 
   &-copyright {
     @include flex(center, space-between);
-    @include size($desktop, $pad: (32.5, 230));
+    padding: 3.25rem 23rem;
     background-color: #e6e6e6;
     width: 100%;
 
     &__title {
-      @include size($desktop, $fz: 16);
-      letter-spacing: 0.4px;
+      font-size: 1.6rem;
+      letter-spacing: .4px;
       color: #7a7a7a;
       font-weight: 400;
     }

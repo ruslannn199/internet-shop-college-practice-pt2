@@ -1,0 +1,54 @@
+@mixin flex($align: center, $justify: center, $flex-dir: row, $flex-wrap: nowrap, $t-align: left) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  flex-direction: $flex-dir;
+  flex-wrap: $flex-wrap;
+  text-align: $t-align;
+}
+
+@mixin background($attachment: null, $clip: null, $color: null, $image: null,
+$origin: null, $position: null, $repeat: null, $size: null) {
+  @if ($attachment != null) {
+    background-attachment: $attachment;
+  }
+  @if ($clip != null) {
+    background-clip: $clip;
+  }
+  @if ($color != null) {
+    background-color: $color;
+  }
+  @if ($image != null) {
+    background-image: $image;
+  }
+  @if ($origin != null) {
+    background-origin: $origin;
+  }
+  @if ($position != null) {
+    background-position: $position;
+  }
+  @if ($repeat != null) {
+    background-repeat: $repeat;
+  }
+  @if ($size != null) {
+    @if length($size) == 1 {
+      background-size: $size;
+    }
+    @if length($size) == 2 {
+      @debug "Size: #{$size}";
+      $background-size: nth($size, 1), nth($size, 2);
+    }
+  }
+}
+
+@mixin media-laptop {
+  @media (max-width: $laptop-width) { @content; }
+}
+
+@mixin media-tablet {
+  @media (max-width: $tablet-width) { @content; }
+}
+
+@mixin media-mobile {
+  @media (max-width: $mobile-width) { @content; }
+}

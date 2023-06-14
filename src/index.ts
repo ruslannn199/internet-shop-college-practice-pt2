@@ -6,13 +6,14 @@ let i = 0;
 window.addEventListener('DOMContentLoaded', () => {
   setInterval(() => {
     i = (i + 1) % radioBtnArr.length;
-    document.getElementById(radioBtnArr[i]).checked = true;
+    const radioBtn = <HTMLInputElement>document.getElementById(radioBtnArr[i]);
+    radioBtn.checked = true;
   }, 7000);
 
   const radioBtns = document.querySelectorAll('.radio-btn');
   for (const btn of radioBtns) {
     btn.addEventListener('change', () => {
-      i = parseInt(btn.getAttribute('id').slice(1), 10);
+      i = parseInt(btn.getAttribute('id')!.slice(1), 10);
     })
   }
 }, false);
