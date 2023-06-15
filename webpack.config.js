@@ -112,14 +112,19 @@ module.exports = {
       filename: 'index.html',
       minify: !isDev,
     }),
-    // new CopyWebpackPlugin({
-    //   patterns: [
-    //     {
-    //       from : 'src/assets/images/static/',
-    //       to: 'assets/images/'
-    //     }
-    //   ]
-    // })
+    new HTMLWebpackPlugin({
+      template: './src/checkout.html',
+      filename: 'checkout/index.html',
+      minify: !isDev,
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from : 'src/assets/images/static/',
+          to: 'assets/images/'
+        }
+      ]
+    })
   ],
 
   devtool: isDev ? 'source-map' : 'hidden-nosources-source-map',
