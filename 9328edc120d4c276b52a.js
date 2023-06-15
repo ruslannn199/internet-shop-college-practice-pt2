@@ -1,0 +1,1 @@
+!function(){"use strict";const e=["r2","r3","r1"];let t=0;window.addEventListener("DOMContentLoaded",(()=>{if(document.getElementById(e[t])){setInterval((()=>{t=(t+1)%e.length,document.getElementById(e[t]).checked=!0}),7e3);const n=document.querySelectorAll(".radio-btn");for(const e of n)e.addEventListener("change",(()=>{t=parseInt(e.getAttribute("id").slice(1),10)}))}}),!1)}();
